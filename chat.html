@@ -1,34 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Simple Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
     <style>
-        /* Your CSS styles for the chat interface go here */
-        #chat-box {
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .chat-box {
             width: 300px;
-            height: 300px;
+            margin: 0 auto;
+        }
+        .chat-messages {
             border: 1px solid #ccc;
+            padding: 10px;
+            height: 200px;
             overflow-y: scroll;
         }
     </style>
 </head>
 <body>
-    <div id="chat-box"></div>
-    <input type="text" id="message-input" placeholder="Type a message...">
-    <button onclick="sendMessage()">Send</button>
+    <div class="chat-box">
+        <h2>Chat Application</h2>
+        <div class="chat-username">
+            <label for="username">Enter your username:</label>
+            <input type="text" id="username" placeholder="Your username">
+            <button onclick="startChat()">Start Chat</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message" placeholder="Type your message">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
 
     <script>
-        // JavaScript for handling chat functionality
-        const chatBox = document.getElementById("chat-box");
-        const messageInput = document.getElementById("message-input");
+        let username;
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message');
+
+        function startChat() {
+            username = document.getElementById('username').value;
+            if (username.trim() !== '') {
+                document.querySelector('.chat-username').style.display = 'none';
+                messageInput.disabled = false;
+                messageInput.focus();
+            }
+        }
 
         function sendMessage() {
             const message = messageInput.value;
-            if (message.trim() !== "") {
-                const messageElement = document.createElement("div");
-                messageElement.textContent = message;
-                chatBox.appendChild(messageElement);
-                messageInput.value = "";
+            if (message.trim() !== '') {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = `${username}: ${message}`;
+                chatMessages.appendChild(messageElement);
+                messageInput.value = '';
+                messageInput.focus();
             }
         }
     </script>
