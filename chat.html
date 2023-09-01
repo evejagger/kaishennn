@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Chat</title>
+    <style>
+        /* Your CSS styles for the chat interface go here */
+        #chat-box {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-box"></div>
+    <input type="text" id="message-input" placeholder="Type a message...">
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        // JavaScript for handling chat functionality
+        const chatBox = document.getElementById("chat-box");
+        const messageInput = document.getElementById("message-input");
+
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message.trim() !== "") {
+                const messageElement = document.createElement("div");
+                messageElement.textContent = message;
+                chatBox.appendChild(messageElement);
+                messageInput.value = "";
+            }
+        }
+    </script>
+</body>
+</html>
